@@ -27,7 +27,7 @@
 
 #include <stdio.h>
 
-void amusement();
+void easter_egg();
 void print_char_list();
 void print_help();
 void print_html();
@@ -36,10 +36,10 @@ void print_string();
 
 int main(int argc, char **argv)
 {
-    if (argc == 2 && **argv == '-') {
-        switch (**++argv) {
-            case 'a': amusement(); break;
+    if (argc == 2 && argv[1][0] == '-') {
+        switch (argv[1][1]) {
             case 'c': print_char_list(); break;
+            case 'e': easter_egg(); break;
             case 'l': print_list(); break;
             case 's': print_string(); break;
             case 'w': print_html(); break;
@@ -51,7 +51,7 @@ int main(int argc, char **argv)
     return 0;
 }
 
-void amusement()
+void easter_egg()
 {
     for (int c=0x1f;c<042;printf("%c",(int)(++c*c*3.5-c*221.5+3606)))
         ;
@@ -67,12 +67,12 @@ void print_char_list()
 void print_help()
 {
     printf("ASCII Character List Help\n"
-           "-a\tAmusement.\n"
            "-c\tPrints just the characters in list format.\n"
            "-h\tPrints help documentation.\n"
            "-l\tPrints in list format.\n"
            "-s\tPrints a string of the characters.\n"
            "-w\tPrints in html format.\n"
+           "-e\tEaster egg.\n"
            "\n");
 }
 
@@ -85,8 +85,7 @@ void print_html()
            "        <th>Dec</th>\n"
            "        <th>Glyph</th>\n"
            "    </thead>\n"
-           "    <tbody>\n"
-           );
+           "    <tbody>\n");
     
     for (char c = 32; c < 127; c++)
         printf("        <tr>\n"
@@ -98,8 +97,7 @@ void print_html()
                c, c, c, c);
     
     printf("    </tbody>\n"
-           "</table>\n"
-           );
+           "</table>\n");
 }
 
 void print_list()
@@ -114,4 +112,6 @@ void print_string()
 {
     for (int c = 0x1f; c < 0x7e; printf("%c", ++c))
         ;
+
+	printf("\n");
 }
